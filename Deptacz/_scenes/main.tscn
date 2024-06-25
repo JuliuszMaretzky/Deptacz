@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://chrwc0jopyc3d"]
+
+[ext_resource type="Script" path="res://_scripts/GameManager.gd" id="1_kmp3a"]
+[ext_resource type="PackedScene" uid="uid://cymfxx2m4xu0k" path="res://_scenes/gardener.tscn" id="2_8y54n"]
+
+[node name="Main" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("gardener")]
+unique_name_in_owner = true
+script = ExtResource("1_kmp3a")
+gardener = NodePath("../gardener")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+
+[node name="gardener" parent="." instance=ExtResource("2_8y54n")]
+position = Vector2(495, 242)

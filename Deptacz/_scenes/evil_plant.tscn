@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dilnn4lgxv0r6"]
+
+[ext_resource type="Script" path="res://_scripts/evil_plant.gd" id="1_i5ep3"]
+[ext_resource type="Texture2D" uid="uid://cfyhjtuytfq62" path="res://_sprites/evil_seed.png" id="2_i6xey"]
+[ext_resource type="Texture2D" uid="uid://c1b7ahprds0sb" path="res://_sprites/evil_seedling.png" id="3_0y06u"]
+[ext_resource type="Texture2D" uid="uid://m5piar5iy85n" path="res://_sprites/evil_tentacle.png" id="4_f4p2n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73163"]
+size = Vector2(40, 38)
+
+[node name="evil_plant" type="Area2D"]
+z_index = 1
+collision_mask = 0
+script = ExtResource("1_i5ep3")
+
+[node name="evil_seed" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_i6xey")
+
+[node name="evil_seedling" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_0y06u")
+
+[node name="evil_tentacle" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_f4p2n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_73163")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
