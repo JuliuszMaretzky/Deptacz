@@ -29,7 +29,7 @@ func summonGardener():
 	gardener.position = lawn[lawnWidth-1][lawnHeight-1].position
 	
 func properVector(position: Vector2):
-	return Vector2(128 * position.x, 128 * position.y)
+	return Vector2(64 * position.x, 64 * position.y)
 
 func plantEvilSeed(position: Vector2):
 	var instance = evil_seed.instantiate()

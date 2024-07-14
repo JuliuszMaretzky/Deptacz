@@ -11,7 +11,7 @@ var growthStages = []
 var growthStageIndex = 0
 
 func _ready():
-	timer.wait_time = 3
+	timer.wait_time = 4
 	timer.start()
 	growthStages.append(evil_seed)
 	growthStages.append(evil_seedling)
