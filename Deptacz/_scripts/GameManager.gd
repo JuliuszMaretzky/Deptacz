@@ -10,24 +10,22 @@ var lawnHeight := 5
 var lawn = []
 
 func _ready():
-	createLawn(lawnWidth,lawnHeight)
+	createLawn()
 	summonGardener()
 	plantEvilSeed(Vector2(0,0))
-	gardener.canMove = true
 
-func createLawn(width: int, height: int):
-	for i in width:
+func createLawn():
+	for i in lawnWidth:
 		lawn.append([])
-		for j in height:
+		for j in lawnHeight:
 			var instance = tile_basic.instantiate()
 			instance.position = properVector(Vector2(i, j))
 			add_child(instance)
 			lawn[i].append(instance)
-	
-	camera.position = properVector(Vector2((width - 1)/2, (height - 1)/2))
+	createNeighborhood()
+	camera.position = properVector(Vector2((lawnWidth - 1)/2, (lawnHeight - 1)/2))
 
 func summonGardener():
-	gardener.actualTileCoords = Vector2(lawnWidth - 1, lawnHeight - 1)
 	gardener.position = lawn[lawnWidth-1][lawnHeight-1].position
 	
 func properVector(position: Vector2):
@@ -39,3 +37,23 @@ func plantEvilSeed(position: Vector2):
 	instance.actualTile = lawn[position.x][position.y]
 	instance.actualTile.isPlanted = true
 	add_child(instance)
+	
+func createNeighborhood():
+	for i in lawnWidth:
+		for j in lawnHeight:
+			if i < lawnWidth - 1:
+				lawn[i][j].addNeighbor(lawn[i+1][j])
+			if i < lawnWidth - 1 && j < lawnHeight - 1:
+				lawn[i][j].addNeighbor(lawn[i+1][j+1])
+			if(j < lawnHeight - 1):
+				lawn[i][j].addNeighbor(lawn[i][j+1])
+			if(i > 0 && j < lawnHeight - 1):
+				lawn[i][j].addNeighbor(lawn[i-1][j+1])
+			if(i > 0):
+				lawn[i][j].addNeighbor(lawn[i-1][j])
+			if(i > 0 && j > 0):
+				lawn[i][j].addNeighbor(lawn[i-1][j-1])
+			if(j > 0):
+				lawn[i][j].addNeighbor(lawn[i][j-1])
+			if(i < lawnWidth - 1 && j > 0):
+				lawn[i][j].addNeighbor(lawn[i+1][j-1])
