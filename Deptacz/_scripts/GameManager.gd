@@ -12,7 +12,7 @@ var lawn = []
 func _ready():
 	createLawn()
 	summonGardener()
-	plantEvilSeed(Vector2(0,0))
+	plantEvilSeed(lawn[0][0])
 
 func createLawn():
 	for i in lawnWidth:
@@ -31,11 +31,12 @@ func summonGardener():
 func properVector(position: Vector2):
 	return Vector2(64 * position.x, 64 * position.y)
 
-func plantEvilSeed(position: Vector2):
+func plantEvilSeed(patch: Area2D):
 	var instance = evil_seed.instantiate()
-	instance.position = properVector(position)
-	instance.actualTile = lawn[position.x][position.y]
+	instance.position = patch.position
+	instance.actualTile = patch
 	instance.actualTile.isPlanted = true
+	instance.game_manager = self
 	add_child(instance)
 	
 func createNeighborhood():

@@ -1,8 +1,8 @@
 extends Area2D
 
 var isPlanted = false
-var neighors = []
+var neighbors = []
 
 func addNeighbor(newNeighbor: Area2D):
-	neighors.append(newNeighbor)
+	neighbors.append(newNeighbor)
 	
