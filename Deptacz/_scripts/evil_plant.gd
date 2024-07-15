@@ -19,12 +19,9 @@ func _ready():
 	growthStages.append(evil_seed)
 	growthStages.append(evil_seedling)
 	growthStages.append(evil_tentacle)
-	print("start: " + str(growthStageIndex))
 	
 func _on_area_entered(area):
-	print(actualTile.isPlanted)
 	actualTile.isPlanted = false
-	print(actualTile.isPlanted)
 	queue_free()
 
 func _on_timer_timeout():
