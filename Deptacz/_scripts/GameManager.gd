@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var gardener: Gardener
+@onready var timer = $Timer
 
 @onready var camera = %Camera2D
 var tile_basic = preload("res://_scenes/tile_basic.tscn")
@@ -58,3 +59,7 @@ func createNeighborhood():
 				lawn[i][j].addNeighbor(lawn[i][j-1])
 			if(i < lawnWidth - 1 && j > 0):
 				lawn[i][j].addNeighbor(lawn[i+1][j-1])
+
+
+func _on_timer_timeout():
+	get_tree().reload_current_scene()

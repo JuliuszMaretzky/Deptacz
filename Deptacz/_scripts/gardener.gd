@@ -4,6 +4,8 @@ extends Area2D
 @onready var game_manager = %GameManager
 @export var speed = 300
 var direction = Vector2.ZERO
+@export var maxHP = 3
+var actualHP = maxHP
 
 func _process(delta):
 	moveGardener(delta)
@@ -28,3 +30,11 @@ func moveGardener(delta):
 		position.y = game_manager.lawn[0][game_manager.lawnHeight-1].position.y
 	if position.y < game_manager.lawn[0][0].position.y:
 		position.y = game_manager.lawn[0][0].position.y
+
+func getDamage(damage:int):
+	actualHP-=damage
+	print(actualHP)
+	if(actualHP<=0):
+		print("dead")
+		game_manager.timer.start()
+		queue_free()

@@ -20,9 +20,12 @@ func _ready():
 	growthStages.append(evil_seedling)
 	growthStages.append(evil_tentacle)
 	
-func _on_area_entered(area):
-	actualTile.isPlanted = false
-	queue_free()
+func _on_area_entered(area:Gardener):
+	if evil_seed.visible:
+		actualTile.isPlanted = false
+		queue_free()
+	else:
+		area.getDamage(growthStageIndex)
 
 func _on_timer_timeout():
 	if !canSpread:
